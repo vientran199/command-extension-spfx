@@ -37,9 +37,10 @@ export default class CommandSetCommandSet extends BaseListViewCommandSet<IComman
 
     if(!this._listName) this._listName = this.properties.listName
     if(currentListName === this._listName) {
-      const compareOneCommand: Command = this.tryGetCommand('COMMAND_1');
-      compareOneCommand.visible = true
+      
       this.setIntervalId = setInterval(()=>{
+        const compareOneCommand: Command = this.tryGetCommand('COMMAND_1');
+        if(!compareOneCommand.visible) compareOneCommand.visible = true
         this._buttonNewCustom = document.querySelector(`button[name="New Button"]`)
         this._buttonNewDefault = document.querySelector('button[name="New"]')
         if(this._buttonNewCustom && this._buttonNewDefault){
@@ -48,15 +49,12 @@ export default class CommandSetCommandSet extends BaseListViewCommandSet<IComman
         }
       },600)
     }else{
-      const compareOneCommand: Command = this.tryGetCommand('COMMAND_1');
-      compareOneCommand.visible = false
+      const _buttonNewCustom = document.querySelector(`button[name="New Button"]`)
+      if(_buttonNewCustom) _buttonNewCustom.replaceWith(this._buttonNewDefault)
       this.setIntervalId = setInterval(()=>{
-        // this._buttonNewCustom = document.querySelector(`button[name="New Button"]`)
-        // if(this._buttonNewCustom && this._buttonNewDefault){
-        //   this._buttonNewCustom.style.display = 'none'
-        //   this._buttonNewDefault.style.display = 'block'
-        // }
-      },600) 
+        const compareOneCommand: Command = this.tryGetCommand('COMMAND_1');
+        if(compareOneCommand.visible) compareOneCommand.visible = false
+      },600)
     }
     return Promise.resolve();
   }
