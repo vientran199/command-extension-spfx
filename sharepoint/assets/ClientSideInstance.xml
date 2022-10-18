@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <ClientSideComponentInstance
+        Title="CommandSet"
+        Location="ClientSideExtension.ListViewCommandSet.CommandBar"
+        ListTemplateId="100"
+        Properties="{&quot;sampleTextOne&quot;:&quot;One item is selected in the list.&quot;, &quot;sampleTextTwo&quot;:&quot;This command is always visible.&quot;}"
+        ComponentId="dc6c38f5-cb2f-4151-9dee-07934ec66ede" />
+</Elements>

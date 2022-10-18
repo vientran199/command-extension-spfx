@@ -1,0 +1,36 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://orcasvn.sharepoint.com/sites/TestTeamSite-Vien/Lists/List1/AllItems.aspx",
+      "customActions": {
+        "dc6c38f5-cb2f-4151-9dee-07934ec66ede": {
+          "location": "ClientSideExtension.ListViewCommandSet.CommandBar",
+          "properties": {
+            "sampleTextOne": "One item is sdsselected in the list",
+            "sampleTextTwo": "This commandádas is always visible.",
+            "commandLink":"https://uifabricicons.azurewebsites.net/",
+            "listName":"List1",
+            "openNewTab": true
+          }
+        }
+      }
+    },
+    "commandSet": {
+      "pageUrl": "https://orcasvn.sharepoint.com/sites/TestTeamSite-Vien/Lists/List2/AllItems.aspx",
+      "customActions": {
+        "dc6c38f5-cb2f-4151-9dee-07934ec66ede": {
+          "location": "ClientSideExtension.ListViewCommandSet.CommandBar",
+          "properties": {
+            "sampleTextOne": "One item is selected in the list",
+            "sampleTextTwo": "This command kasjhdkjis always visible.",
+            "commandLink":"https://uifabricicons.azurewebsites.net/",
+            "listName":"List1"
+          }
+        }
+      }
+    }
+  }
+}

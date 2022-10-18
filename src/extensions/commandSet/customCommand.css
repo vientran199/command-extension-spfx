@@ -1,0 +1,7 @@
+button[name='New Button'] > span{
+    background-color: rgb(105, 121, 126);
+    color: #fff;
+}
+button[name='New Button']:hover > span{
+    background-color: rgb(93, 108, 112) !important;
+}

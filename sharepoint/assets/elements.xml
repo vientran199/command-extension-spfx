@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction
+        Title="CommandSet"
+        RegistrationId="100"
+        RegistrationType="List"
+        Location="ClientSideExtension.ListViewCommandSet.CommandBar"
+        ClientSideComponentId="dc6c38f5-cb2f-4151-9dee-07934ec66ede"
+        ClientSideComponentProperties="{&quot;commandLink&quot;:&quot;https://orcasvn.sharepoint.com/sites/TestTeamSite-Vien/_layouts/15/viewlsts.aspx?view=14&quot;,&quot;listName&quot;:&quot;List1&quot;,&quot;openNewTab&quot;:&quot;true&quot;}">
+    </CustomAction>
+</Elements>
