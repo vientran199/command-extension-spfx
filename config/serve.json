@@ -13,7 +13,8 @@
             "sampleTextTwo": "This commandádas is always visible.",
             "commandLink":"https://uifabricicons.azurewebsites.net/",
             "listName":"List1",
-            "openNewTab": true
+            "openNewTab": true,
+            "lableButton": "New Button"
           }
         }
       }

@@ -6,6 +6,6 @@
         RegistrationType="List"
         Location="ClientSideExtension.ListViewCommandSet.CommandBar"
         ClientSideComponentId="dc6c38f5-cb2f-4151-9dee-07934ec66ede"
-        ClientSideComponentProperties="{&quot;commandLink&quot;:&quot;https://orcasvn.sharepoint.com/sites/TestTeamSite-Vien/_layouts/15/viewlsts.aspx?view=14&quot;,&quot;listName&quot;:&quot;List1&quot;,&quot;openNewTab&quot;:&quot;true&quot;}">
+        ClientSideComponentProperties="{&quot;commandLink&quot;:&quot;https://orcasvn.sharepoint.com/sites/TestTeamSite-Vien/_layouts/15/viewlsts.aspx?view=14&quot;,&quot;listName&quot;:&quot;List1&quot;,&quot;openNewTab&quot;:false,&quot;lableButton&quot;:&quot;New Button&quot;}">
     </CustomAction>
 </Elements>

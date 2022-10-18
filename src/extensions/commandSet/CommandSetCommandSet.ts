@@ -17,6 +17,7 @@ export interface ICommandSetCommandSetProperties {
   commandLink:string;
   listName: string;
   openNewTab: boolean;
+  lableButton: string;
 }
 
 export default class CommandSetCommandSet extends BaseListViewCommandSet<ICommandSetCommandSetProperties> {
@@ -31,6 +32,7 @@ export default class CommandSetCommandSet extends BaseListViewCommandSet<IComman
     this._buttonNewDefaultParent = this._buttonNewDefault.parentElement
 
     if(this.setIntervalId) clearInterval(this.setIntervalId)
+    //Add 2 button new into position 1
     this.setIntervalId = setInterval(()=>{
       const _buttonNewDefault = document.querySelector('button[name="New"]')
       const _buttonNewCustom:NodeListOf<HTMLElement> = document.querySelectorAll('button[name="New Button"]')
@@ -46,19 +48,24 @@ export default class CommandSetCommandSet extends BaseListViewCommandSet<IComman
           _buttonNewDefaultParent.appendChild(_buttonNewCustom[0])
         }
       }
-    },300)
-    if(this._intervalHandleShowButton) clearInterval(this._intervalHandleShowButton)
-    this._intervalHandleShowButton = setInterval(()=>{
-      const _buttonNewDefault = document.querySelector('button[name="New"]')
+      // const _buttonNewDefault = document.querySelector('button[name="New"]')
       if(_buttonNewDefault){
         const buttonNewList = _buttonNewDefault.parentElement.childNodes;
         const url = decodeURIComponent(window.location.pathname)
         if(url.indexOf(this.properties.listName) >= 0) {
           if(buttonNewList[0]) (buttonNewList[0] as HTMLElement).style.display = 'none';
-          if(buttonNewList[1]) (buttonNewList[1] as HTMLElement).style.display = 'block';
+          if(buttonNewList[1]) {
+            (buttonNewList[1] as HTMLElement).style.display = 'block';
+            const lableButton = (buttonNewList[1] as HTMLElement).querySelector('.ms-Button-label')
+            if(lableButton.textContent !== this.properties.lableButton && this.properties.lableButton){
+              lableButton.textContent = this.properties.lableButton
+            }
+          }
         }else{
           if(buttonNewList[0]) (buttonNewList[0] as HTMLElement).style.display = 'block';
-          if(buttonNewList[1]) (buttonNewList[1] as HTMLElement).style.display = 'none';
+          if(buttonNewList[1]) {
+            (buttonNewList[1] as HTMLElement).style.display = 'none';
+          }
         }
       }
     },300)
@@ -68,6 +75,7 @@ export default class CommandSetCommandSet extends BaseListViewCommandSet<IComman
   public onExecute(event: IListViewCommandSetExecuteEventParameters): void {
     switch (event.itemId) {
       case 'COMMAND_1':
+        console.log(this.properties)
         window.open(this.properties.commandLink,this.properties.openNewTab?'_blank':'_self')
         break;
       default:
@@ -75,9 +83,4 @@ export default class CommandSetCommandSet extends BaseListViewCommandSet<IComman
     }
   }
   
-  public onDispose(): void {
-    if(this.setIntervalId) clearInterval(this.setIntervalId)
-    if(this._intervalHandleShowButton) clearInterval(this._intervalHandleShowButton)
-  }
-
 }

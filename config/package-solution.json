@@ -3,7 +3,7 @@
   "solution": {
     "name": "command-extension-client-side-solution",
     "id": "9424e0da-4a26-42cc-b6cd-3ff5bd1b3007",
-    "version": "1.0.0.0",
+    "version": "1.0.0.1",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -30,7 +30,7 @@
         "title": "Application Extension - Deployment of custom action",
         "description": "Deploys a custom action with ClientSideComponentId association",
         "id": "4e3ec6c5-b27d-4b55-a4b4-351ca1572b7c",
-        "version": "1.0.0.0",
+        "version": "1.0.0.1",
         "assets": {
           "elementManifests": [
             "elements.xml",
