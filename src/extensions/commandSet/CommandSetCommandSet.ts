@@ -21,62 +21,63 @@ export interface ICommandSetCommandSetProperties {
 
 export default class CommandSetCommandSet extends BaseListViewCommandSet<ICommandSetCommandSetProperties> {
   private setIntervalId: number
+  private _intervalHandleShowButton:number
   private _listName: string
   private _buttonNewDefault: HTMLElement
   private _buttonNewDefaultParent: HTMLElement
   private _buttonNewCustom: HTMLElement
   public onInit(): Promise<void> {
-    console.log('run onInit')
-    // const compareOneCommand: Command = this.tryGetCommand('COMMAND_1');
-    // this._buttonNewDefault = document.querySelector('button[name="New"]')
-    // if(this._buttonNewDefault.parentElement) this._buttonNewDefaultParent = this._buttonNewDefault.parentElement
-    if(this.setIntervalId) clearInterval(this.setIntervalId)
-    let currentListName = this.context.listView.list.title
-
     this._buttonNewDefault = document.querySelector('button[name="New"]')
+    this._buttonNewDefaultParent = this._buttonNewDefault.parentElement
 
-    if(!this._listName) this._listName = this.properties.listName
-    if(currentListName === this._listName) {
-      
-      this.setIntervalId = setInterval(()=>{
-        const compareOneCommand: Command = this.tryGetCommand('COMMAND_1');
-        if(!compareOneCommand.visible) compareOneCommand.visible = true
-        this._buttonNewCustom = document.querySelector(`button[name="New Button"]`)
-        this._buttonNewDefault = document.querySelector('button[name="New"]')
-        if(this._buttonNewCustom && this._buttonNewDefault){
-          this._buttonNewDefault.style.display = 'none'
-          this._buttonNewDefault.replaceWith(this._buttonNewCustom)
+    if(this.setIntervalId) clearInterval(this.setIntervalId)
+    this.setIntervalId = setInterval(()=>{
+      const _buttonNewDefault = document.querySelector('button[name="New"]')
+      const _buttonNewCustom:NodeListOf<HTMLElement> = document.querySelectorAll('button[name="New Button"]')
+      if(_buttonNewCustom.length !== 0) {
+        if(_buttonNewCustom.length > 1){
+          _buttonNewCustom.forEach((e,i)=>{
+            if(i !== 0) e.style.display = 'none'
+          })
         }
-      },600)
-    }else{
-      const _buttonNewCustom = document.querySelector(`button[name="New Button"]`)
-      if(_buttonNewCustom) _buttonNewCustom.replaceWith(this._buttonNewDefault)
-      this.setIntervalId = setInterval(()=>{
-        const compareOneCommand: Command = this.tryGetCommand('COMMAND_1');
-        if(compareOneCommand.visible) compareOneCommand.visible = false
-      },600)
-    }
+        const _buttonNewDefaultParent = _buttonNewDefault.parentElement
+        const childList = _buttonNewDefaultParent.childElementCount
+        if(childList === 1){
+          _buttonNewDefaultParent.appendChild(_buttonNewCustom[0])
+        }
+      }
+    },300)
+    if(this._intervalHandleShowButton) clearInterval(this._intervalHandleShowButton)
+    this._intervalHandleShowButton = setInterval(()=>{
+      const _buttonNewDefault = document.querySelector('button[name="New"]')
+      if(_buttonNewDefault){
+        const buttonNewList = _buttonNewDefault.parentElement.childNodes;
+        const url = decodeURIComponent(window.location.pathname)
+        if(url.indexOf(this.properties.listName) >= 0) {
+          if(buttonNewList[0]) (buttonNewList[0] as HTMLElement).style.display = 'none';
+          if(buttonNewList[1]) (buttonNewList[1] as HTMLElement).style.display = 'block';
+        }else{
+          if(buttonNewList[0]) (buttonNewList[0] as HTMLElement).style.display = 'block';
+          if(buttonNewList[1]) (buttonNewList[1] as HTMLElement).style.display = 'none';
+        }
+      }
+    },300)
     return Promise.resolve();
   }
 
   public onExecute(event: IListViewCommandSetExecuteEventParameters): void {
-    console.log(this.properties)
-    console.log(event)
     switch (event.itemId) {
       case 'COMMAND_1':
-        console.log(this.properties.commandLink)
-        // window.location.href = this.properties.commandLink
+        window.open(this.properties.commandLink,this.properties.openNewTab?'_blank':'_self')
         break;
       default:
         throw new Error('Unknown command');
     }
   }
-
-  protected onDispose(): void {
+  
+  public onDispose(): void {
     if(this.setIntervalId) clearInterval(this.setIntervalId)
+    if(this._intervalHandleShowButton) clearInterval(this._intervalHandleShowButton)
   }
 
-  public onListViewUpdated(event: IListViewCommandSetListViewUpdatedParameters): void {
-
-  }
 }
